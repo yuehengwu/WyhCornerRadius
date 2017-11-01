@@ -7,7 +7,7 @@
 //
 
 #import "WyhDemoBaseCell.h"
-#import "wyhRadiusHeader.h"
+#import "wyhCornerRadius.h"
 
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
@@ -77,6 +77,8 @@
     }];
 }
 
+#pragma mark - UIImageView
+
 - (UIImageView *)createImageViewWithIndex:(NSInteger)index {
     UIImageView *img = [[UIImageView alloc]init];
     img.frame = [self configFrameWithIndex:index];
@@ -84,6 +86,8 @@
     [img wyh_autoSetImageCornerRedius:viewWidth/2 ConrnerType:rectCorner Image:[UIImage imageNamed:[NSString stringWithFormat:@"dog%ld",index+1]]];
     return img;
 }
+
+#pragma mark - UIButton
 
 - (UIButton *)createButtonWithIndex:(NSInteger)index {
     UIImage *imageNormal = [UIImage imageNamed:[NSString stringWithFormat:@"dog%ld",index+1]];
@@ -98,16 +102,19 @@
     return btn;
 }
 
+#pragma mark - UILabel
+
 - (UILabel *)createLabelWithIndex:(NSInteger)index {
     UILabel *label = [[UILabel alloc]init];
     label.text = [NSString stringWithFormat:@"%ld",index+1];
     label.textAlignment = NSTextAlignmentCenter;
     label.frame = [self configFrameWithIndex:index];
     UIRectCorner rectCorner = [self configRectCornerWithIndex:index];
-    UIColor *randomColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0];
     [label wyh_CornerRadius:viewWidth/2 Image:nil RectCornerType:rectCorner BorderColor:[UIColor magentaColor] BorderWidth:2 BackgroundColor:nil];
     return label;
 }
+
+#pragma mark - UIView
 
 - (UIView *)createViewWithIndex:(NSInteger)index {
     UIView *view = [[UIView alloc]init];

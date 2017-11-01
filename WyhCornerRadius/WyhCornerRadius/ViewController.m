@@ -8,12 +8,15 @@
 
 #import "ViewController.h"
 #import "WyhDemoBaseCell.h"
+#import "WyhImageViewDemoVC.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray<UIView *> *sectionViewsArr;
 
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) UILabel *sectionLabel;
 
 @end
 
@@ -22,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    self.title = @"WyhCornerRadius";
     [self.view addSubview:self.tableView];
 }
 
@@ -59,7 +62,32 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    return 30;
+}
+
+- (void)clickSection:(UITapGestureRecognizer *)tap {
+    UILabel *label = (UILabel *)tap.view;
+    if ([_sectionViewsArr indexOfObject:label] == NSNotFound) {
+        return;
+    }
+    NSInteger index = [_sectionViewsArr indexOfObject:label];
+    switch (index) {
+        case 0:
+        {
+            WyhImageViewDemoVC *imgVC = [[WyhImageViewDemoVC alloc]init];
+            imgVC.isNeedRequestServer = YES;
+            [self.navigationController pushViewController:imgVC animated:YES];
+        }
+            break;
+        case 1:
+        {
+            WyhImageViewDemoVC *imgVC = [[WyhImageViewDemoVC alloc]init];
+            imgVC.isNeedRequestServer = NO;
+            [self.navigationController pushViewController:imgVC animated:YES];
+        } break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - Lazy
@@ -77,14 +105,25 @@
     if (!_sectionViewsArr) {
         _sectionViewsArr = [NSMutableArray new];
         NSArray *names = @[@"  UIImageView",
-                           @"  UIButton",
+                           @"  UIButton(Try to click icon)",
                            @"  UILabel",
                            @"  UIView"];
         for (int i = 0; i < 4; i++) {
-            UILabel *label = [[UILabel alloc]init];
-            label.text = names[i];
-            label.textColor = [UIColor lightGrayColor];
-            [_sectionViewsArr addObject:label];
+            UILabel *sectionLabel = [[UILabel alloc]init];
+            sectionLabel.textColor = [UIColor whiteColor];
+            sectionLabel.backgroundColor = [UIColor grayColor];
+            sectionLabel.text = names[i];
+            UILabel *go = [[UILabel alloc]init];
+            go.textAlignment = NSTextAlignmentRight;
+            go.text = @">";
+            go.textColor = [UIColor lightGrayColor];
+            go.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 30, 0, 20, 30);
+            [sectionLabel addSubview:go];
+            
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickSection:)];
+            sectionLabel.userInteractionEnabled = true;
+            [sectionLabel addGestureRecognizer:tap];
+            [_sectionViewsArr addObject:sectionLabel];
         }
     }
     return _sectionViewsArr;

@@ -18,16 +18,19 @@
 @property (nonatomic, strong) UIColor *wyh_borderColor;
 @property (nonatomic, assign) CGFloat wyh_borderWidth;
 @property (nonatomic, strong) UIColor *wyh_backgroundColor;
+@property (nonatomic, assign) BOOL isAutoSet;
 
 @end
 
 @implementation UIImageView (wyhRadius)
 
-+ (void)load {
-    wyh_swizzleMethod(@selector(setImage:), @selector(wyh_setImage:));
-}
 
 - (void)wyh_setImage:(UIImage *)image {
+    
+    if (!self.isAutoSet) {
+        [self wyh_setImage:image]; //此时方法已经交换过了
+        return;
+    }
     
     __block CGSize _size = self.bounds.size;
     
@@ -40,16 +43,21 @@
     
 }
 
++ (void)swizzleMethod {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        wyh_swizzleMethod(@selector(setImage:), @selector(wyh_setImage:));
+    });
+}
+
 #pragma mark - Publick Function
 
 - (void)wyh_autoSetImageCornerRedius:(CGFloat)cornerRedius ConrnerType:(UIRectCorner)cornerType {
-    self.wyh_cornerRadius = cornerRedius;
-    self.wyh_cornerTypes = cornerType;
+    [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:nil BorderWidth:0 BackgroundColor:nil];
 }
 
 - (void)wyh_autoSetImageCornerRedius:(CGFloat)cornerRedius ConrnerType:(UIRectCorner)cornerType Image:(UIImage *)image {
-    self.wyh_cornerRadius = cornerRedius;
-    self.wyh_cornerTypes = cornerType;
+    [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:nil BorderWidth:0 BackgroundColor:nil];
     [self setImage:image];
 }
 
@@ -58,11 +66,21 @@
                          BorderColor:(UIColor *)borderColor
                          BorderWidth:(CGFloat)borderWidth
                      BackgroundColor:(UIColor *)backgroundColor {
+    [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:borderColor BorderWidth:borderWidth BackgroundColor:backgroundColor];
+}
+
+- (void)cachePropertyWithCornerRedius:(CGFloat)cornerRedius
+                          ConrnerType:(UIRectCorner)cornerType
+                          BorderColor:(UIColor *)borderColor
+                          BorderWidth:(CGFloat)borderWidth
+                      BackgroundColor:(UIColor *)backgroundColor {
     self.wyh_cornerRadius = cornerRedius;
     self.wyh_cornerTypes = cornerType;
     self.wyh_borderColor = borderColor;
     self.wyh_borderWidth = borderWidth;
     self.wyh_backgroundColor = backgroundColor;
+    self.isAutoSet = YES;
+    [UIImageView swizzleMethod];
 }
 
 #pragma mark - Property
@@ -105,6 +123,14 @@
 
 - (CGFloat)wyh_borderWidth {
     return [objc_getAssociatedObject(self, _cmd) doubleValue];
+}
+
+- (void)setIsAutoSet:(BOOL)isAutoSet {
+    objc_setAssociatedObject(self, @selector(isAutoSet), @(isAutoSet), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isAutoSet {
+    return [objc_getAssociatedObject(self, _cmd) integerValue];
 }
 
 @end
