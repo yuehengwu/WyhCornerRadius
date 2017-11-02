@@ -40,7 +40,7 @@
             [self wyh_setImage:finalImage];
         });
     });
-    
+
 }
 
 + (void)swizzleMethod {
