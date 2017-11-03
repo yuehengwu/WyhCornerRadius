@@ -15,7 +15,6 @@
 @property (nonatomic, strong) NSMutableArray *serverImageUrls;
 @property (nonatomic, strong) NSMutableArray *localImageUrls;
 
-@property (nonatomic, strong) UITableView *offTableView;
 
 @end
 

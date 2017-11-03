@@ -115,19 +115,19 @@
     __block CGSize _size = size;
     
     __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    wyh_async_concurrent_dispatch(^{
     
         if (CGSizeEqualToSize(_size, CGSizeZero)) {
             if (CGSizeEqualToSize(weakSelf.bounds.size, CGSizeZero)) {
                 return ;
             }
-            wyh_safe_dispatch(^{
+            wyh_async_safe_dispatch(^{
                 _size = weakSelf.bounds.size;
             });
         }
         UIImage *currentImage = [UIImage wyh_getCornerImageFromCornerRadius:cornerRadius Image:image Size:_size RectCornerType:rectCornerType BorderColor:borderColor BorderWidth:borderWidth BackgroundColor:backgroundColor];
         
-        wyh_safe_dispatch(^{
+        wyh_async_safe_dispatch(^{
             if ([self isKindOfClass:[UIImageView class]]) {
                 ((UIImageView *)self).image = currentImage;
             } else if ([self isKindOfClass:[UIButton class]]) {

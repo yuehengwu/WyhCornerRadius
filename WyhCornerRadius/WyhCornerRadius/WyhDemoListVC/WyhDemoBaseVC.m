@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.offTableView];
     
@@ -38,6 +39,12 @@
     }
     [self changeRenderingModeFromSubClass];
 }
+
+- (void)changeRenderingModeFromSubClass {
+    // subClass implementation
+}
+
+#pragma mark - Lazy
 
 -(UITableView *)tableView{
     if (!_tableView) {

@@ -18,39 +18,40 @@
 @property (nonatomic, strong) UIColor *wyh_borderColor;
 @property (nonatomic, assign) CGFloat wyh_borderWidth;
 @property (nonatomic, strong) UIColor *wyh_backgroundColor;
+@property (nonatomic, assign) BOOL isInitFromCircle;
 @property (nonatomic, assign) BOOL isAutoSet;
+
 
 @end
 
 @implementation UIImageView (wyhRadius)
 
-
-- (void)wyh_setImage:(UIImage *)image {
-    
-    if (!self.isAutoSet) {
-        [self wyh_setImage:image]; //此时方法已经交换过了
-        return;
-    }
-    
-    __block CGSize _size = self.bounds.size;
-    
-    wyh_async_dispatch(^{
-        UIImage *finalImage = [UIImage wyh_getCornerImageFromCornerRadius:self.wyh_cornerRadius Image:image Size:_size RectCornerType:self.wyh_cornerTypes BorderColor:self.wyh_borderColor BorderWidth:self.wyh_borderWidth BackgroundColor:self.wyh_backgroundColor];
-        wyh_safe_dispatch(^{
-            [self wyh_setImage:finalImage];
-        });
-    });
-
++ (void)load {
+    [self swizzleMethod];
 }
 
 + (void)swizzleMethod {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        wyh_swizzleMethod(@selector(setImage:), @selector(wyh_setImage:));
-    });
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+        wyh_swizzleMethod(@selector(layoutSubviews), @selector(wyh_layoutSubview));
+//    });
+}
+
+- (void)wyh_layoutSubview {
+    [self wyh_layoutSubview];
+    if (self.isAutoSet) {
+        [self settingCornerImage];
+    }
 }
 
 #pragma mark - Publick Function
+
++ (instancetype)circleImageView {
+    UIImageView *imageView = [[UIImageView alloc]init];
+    imageView.isInitFromCircle = YES;
+    imageView.isAutoSet = YES;
+    return imageView;
+}
 
 - (void)wyh_autoSetImageCornerRedius:(CGFloat)cornerRedius ConrnerType:(UIRectCorner)cornerType {
     [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:nil BorderWidth:0 BackgroundColor:nil];
@@ -69,6 +70,11 @@
     [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:borderColor BorderWidth:borderWidth BackgroundColor:backgroundColor];
 }
 
+#pragma mark - Private Function
+
+/**
+ cache all the properties
+ */
 - (void)cachePropertyWithCornerRedius:(CGFloat)cornerRedius
                           ConrnerType:(UIRectCorner)cornerType
                           BorderColor:(UIColor *)borderColor
@@ -80,7 +86,27 @@
     self.wyh_borderWidth = borderWidth;
     self.wyh_backgroundColor = backgroundColor;
     self.isAutoSet = YES;
-    [UIImageView swizzleMethod];
+    [self setNeedsLayout];
+}
+
+/**
+ setting the final Corner Image
+ */
+- (void)settingCornerImage {
+    __block CGSize _size = self.bounds.size;
+    __block UIImage *img = self.image;
+    if (self.isInitFromCircle) {
+        self.wyh_cornerRadius = self.bounds.size.height/2;
+        self.wyh_cornerTypes = UIRectCornerAllCorners;
+        self.wyh_borderWidth = 0;
+        self.wyh_backgroundColor = nil;
+    }
+    wyh_async_concurrent_dispatch(^{
+        UIImage *finalImage = [UIImage wyh_getCornerImageFromCornerRadius:self.wyh_cornerRadius Image:img Size:_size RectCornerType:self.wyh_cornerTypes BorderColor:self.wyh_borderColor BorderWidth:self.wyh_borderWidth BackgroundColor:self.wyh_backgroundColor];
+        wyh_async_safe_dispatch(^{
+            [self setImage:finalImage];
+        });
+    });
 }
 
 #pragma mark - Property
@@ -130,6 +156,14 @@
 }
 
 - (BOOL)isAutoSet {
+    return [objc_getAssociatedObject(self, _cmd) integerValue];
+}
+
+- (void)setIsInitFromCircle:(BOOL)isInitFromCircle {
+    objc_setAssociatedObject(self, @selector(isInitFromCircle), @(isInitFromCircle), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isInitFromCircle {
     return [objc_getAssociatedObject(self, _cmd) integerValue];
 }
 

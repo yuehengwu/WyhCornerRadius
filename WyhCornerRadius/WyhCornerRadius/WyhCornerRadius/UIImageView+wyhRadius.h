@@ -12,6 +12,13 @@
 
 
 /**
+ 闪速创建一个圆图
+
+ @return <#return value description#>
+ */
++ (instancetype)circleImageView;
+
+/**
  自动设置图片的圆角
 
  @param cornerRedius <#cornerRedius description#>

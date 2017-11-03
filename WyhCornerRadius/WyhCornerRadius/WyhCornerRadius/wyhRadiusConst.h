@@ -14,9 +14,9 @@ Method oneMethod = class_getInstanceMethod(self, oneSel); \
 Method anotherMethod = class_getInstanceMethod(self, anotherSel); \
 method_exchangeImplementations(oneMethod, anotherMethod); \
 
-#define wyh_async_dispatch(block) dispatch_async(dispatch_get_global_queue(0, 0),block);
+#define wyh_async_concurrent_dispatch(block) dispatch_async(dispatch_queue_create("WyhDrawingImage", DISPATCH_QUEUE_CONCURRENT),block);
 
-#define wyh_safe_dispatch(block) \
+#define wyh_async_safe_dispatch(block) \
 if ([NSThread isMainThread]) { \
 block(); \
 } else { \

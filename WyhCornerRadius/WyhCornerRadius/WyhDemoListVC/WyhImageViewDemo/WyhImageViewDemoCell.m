@@ -48,10 +48,13 @@
     
     for (int index = 0; index < 5; index++) {
         UIImageView *img = [[UIImageView alloc]init];
+
         img.frame = [self configFrameWithIndex:index];
         if (!self.isOffscreen) {
-            [img wyh_autoSetImageCornerRedius:viewWidth/2 ConrnerType:(UIRectCornerAllCorners)];
+            [img wyh_autoSetImageCornerRedius:viewWidth/2 ConrnerType:(UIRectCornerAllCorners) BorderColor:[UIColor greenColor] BorderWidth:1 BackgroundColor:nil];
         }else {
+            img.layer.borderColor = [UIColor redColor].CGColor;
+            img.layer.borderWidth = 1;
             img.layer.masksToBounds = YES;
             img.layer.cornerRadius = viewWidth/2;
         }
