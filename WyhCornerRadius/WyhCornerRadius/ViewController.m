@@ -115,7 +115,7 @@
             sectionLabel.text = names[i];
             UILabel *go = [[UILabel alloc]init];
             go.textAlignment = NSTextAlignmentRight;
-            go.text = @">";
+            if (i==0) go.text = @">";
             go.textColor = [UIColor lightGrayColor];
             go.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 30, 0, 20, 30);
             [sectionLabel addSubview:go];
