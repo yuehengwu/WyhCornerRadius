@@ -59,16 +59,23 @@
 
 - (void)wyh_autoSetImageCornerRedius:(CGFloat)cornerRedius ConrnerType:(UIRectCorner)cornerType Image:(UIImage *)image {
     [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:nil BorderWidth:0 BackgroundColor:nil];
-    [self setImage:image];
+    if (image) {
+        [self setImage:image];
+    }
 }
 
 - (void)wyh_autoSetImageCornerRedius:(CGFloat)cornerRedius
                          ConrnerType:(UIRectCorner)cornerType
                          BorderColor:(UIColor *)borderColor
                          BorderWidth:(CGFloat)borderWidth
-                     BackgroundColor:(UIColor *)backgroundColor {
-    [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:borderColor BorderWidth:borderWidth BackgroundColor:backgroundColor];
+                               Image:(UIImage *)image{
+    [self cachePropertyWithCornerRedius:cornerRedius ConrnerType:cornerType BorderColor:borderColor BorderWidth:borderWidth BackgroundColor:nil];
+    if (image) {
+        [self setImage:image];
+    }
 }
+
+
 
 #pragma mark - Private Function
 

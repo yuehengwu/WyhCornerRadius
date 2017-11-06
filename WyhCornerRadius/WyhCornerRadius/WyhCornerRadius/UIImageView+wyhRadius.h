@@ -40,18 +40,18 @@
                                Image:(UIImage *)image;
 
 /**
- 自动设置带边框及背景的图片圆角
+ 自动设置带边框的图片圆角
 
  @param cornerRedius <#cornerRedius description#>
  @param cornerType <#cornerType description#>
  @param borderColor <#borderColor description#>
  @param borderWidth <#borderWidth description#>
- @param backgroundColor <#backgroundColor description#>
+ @param image <#backgroundColor description#>
  */
 - (void)wyh_autoSetImageCornerRedius:(CGFloat)cornerRedius
-                     ConrnerType:(UIRectCorner)cornerType
-                     BorderColor:(UIColor *)borderColor
-                     BorderWidth:(CGFloat)borderWidth
-                 BackgroundColor:(UIColor *)backgroundColor;
+                         ConrnerType:(UIRectCorner)cornerType
+                         BorderColor:(UIColor *)borderColor
+                         BorderWidth:(CGFloat)borderWidth
+                               Image:(UIImage *)image;
 
 @end
