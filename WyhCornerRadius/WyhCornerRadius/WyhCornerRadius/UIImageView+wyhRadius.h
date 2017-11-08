@@ -16,7 +16,7 @@
 
  @return <#return value description#>
  */
-+ (instancetype)circleImageView;
++ (instancetype)wyh_circleImageView;
 
 /**
  自动设置图片的圆角

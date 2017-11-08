@@ -18,6 +18,7 @@
 		096B16981FA8CDA600CCE6F3 /* UIImage+wyhRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 096B16911FA8CDA600CCE6F3 /* UIImage+wyhRadius.m */; };
 		096B16991FA8CDA600CCE6F3 /* UIImageView+wyhRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 096B16931FA8CDA600CCE6F3 /* UIImageView+wyhRadius.m */; };
 		096B169A1FA8CDA600CCE6F3 /* UIView+wyhRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 096B16951FA8CDA600CCE6F3 /* UIView+wyhRadius.m */; };
+		0992AFB11FACAF5300D9042F /* WyhDemoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0992AFB01FACAF5300D9042F /* WyhDemoListVC.m */; };
 		099792E11FA9FDA600F964E5 /* WyhDemoBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 099792E01FA9FDA600F964E5 /* WyhDemoBaseVC.m */; };
 		099792E81FAA011500F964E5 /* WyhImageViewDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 099792E71FAA011500F964E5 /* WyhImageViewDemoVC.m */; };
 		099792EE1FAA013C00F964E5 /* WyhImageViewDemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 099792ED1FAA013C00F964E5 /* WyhImageViewDemoCell.m */; };
@@ -80,6 +81,8 @@
 		096B16951FA8CDA600CCE6F3 /* UIView+wyhRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+wyhRadius.m"; sourceTree = "<group>"; };
 		096B16961FA8CDA600CCE6F3 /* wyhRadiusConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wyhRadiusConst.h; sourceTree = "<group>"; };
 		096B16971FA8CDA600CCE6F3 /* wyhCornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wyhCornerRadius.h; sourceTree = "<group>"; };
+		0992AFAF1FACAF5300D9042F /* WyhDemoListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WyhDemoListVC.h; sourceTree = "<group>"; };
+		0992AFB01FACAF5300D9042F /* WyhDemoListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WyhDemoListVC.m; sourceTree = "<group>"; };
 		099792DF1FA9FDA600F964E5 /* WyhDemoBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WyhDemoBaseVC.h; sourceTree = "<group>"; };
 		099792E01FA9FDA600F964E5 /* WyhDemoBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WyhDemoBaseVC.m; sourceTree = "<group>"; };
 		099792E61FAA011500F964E5 /* WyhImageViewDemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WyhImageViewDemoVC.h; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 			children = (
 				099792DF1FA9FDA600F964E5 /* WyhDemoBaseVC.h */,
 				099792E01FA9FDA600F964E5 /* WyhDemoBaseVC.m */,
+				0992AFAF1FACAF5300D9042F /* WyhDemoListVC.h */,
+				0992AFB01FACAF5300D9042F /* WyhDemoListVC.m */,
 				099792E51FAA011500F964E5 /* WyhImageViewDemo */,
 			);
 			path = WyhDemoListVC;
@@ -418,6 +423,7 @@
 				099793441FAA066300F964E5 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0997933D1FAA066300F964E5 /* SDWebImageDownloader.m in Sources */,
 				096B166D1FA8CD6F00CCE6F3 /* main.m in Sources */,
+				0992AFB11FACAF5300D9042F /* WyhDemoListVC.m in Sources */,
 				0997933B1FAA066300F964E5 /* SDWebImageCompat.m in Sources */,
 				099793401FAA066300F964E5 /* SDWebImagePrefetcher.m in Sources */,
 				099793431FAA066300F964E5 /* UIImage+MultiFormat.m in Sources */,
