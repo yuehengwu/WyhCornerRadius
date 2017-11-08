@@ -51,7 +51,7 @@
 
         img.frame = [self configFrameWithIndex:index];
         if (!self.isOffscreen) {
-            [img wyh_autoSetImageCornerRedius:viewWidth/2 ConrnerType:(UIRectCornerAllCorners) BorderColor:[UIColor greenColor] BorderWidth:1 BackgroundColor:nil];
+            [img wyh_autoSetImageCornerRedius:viewWidth/2 ConrnerType:(UIRectCornerAllCorners) BorderColor:[UIColor greenColor] BorderWidth:1 Image:nil];
         }else {
             img.layer.borderColor = [UIColor redColor].CGColor;
             img.layer.borderWidth = 1;
@@ -74,7 +74,7 @@
         if ([urls[0] isKindOfClass:[NSURL class]]) {
             [img sd_setImageWithURL:urls[idx] placeholderImage:[UIImage imageNamed:@"glb_placeholder"]];
         }else {
-            img.image = [UIImage imageNamed:urls[idx]];
+            [img wyh_autoSetImageCornerRedius:viewWidth/2 ConrnerType:(UIRectCornerAllCorners) BorderColor:[UIColor greenColor] BorderWidth:1 Image:[UIImage imageNamed:urls[idx]]];
         }
     }];
 }
