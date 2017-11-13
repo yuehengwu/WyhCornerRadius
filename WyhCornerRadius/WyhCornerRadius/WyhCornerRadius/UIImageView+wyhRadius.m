@@ -34,19 +34,32 @@
 //    static dispatch_once_t onceToken;
 //    dispatch_once(&onceToken, ^{
         wyh_swizzleMethod(@selector(layoutSubviews), @selector(wyh_layoutSubview));
+    {
+        wyh_swizzleMethod(@selector(setImage:), @selector(wyh_setImage:));
+    }
 //    });
+}
+
+- (void)wyh_setImage:(UIImage *)image {
+    if (self.isAutoSet) {
+        [self settingCornerImage:image];
+    }else {
+        [self wyh_setImage:image];
+    }
 }
 
 - (void)wyh_layoutSubview {
     [self wyh_layoutSubview];
     if (self.isAutoSet) {
-        [self settingCornerImage];
+        if (self.image) {
+            [self settingCornerImage:self.image];
+        }
     }
 }
 
 #pragma mark - Publick Function
 
-+ (instancetype)circleImageView {
++ (instancetype)wyh_circleImageView {
     UIImageView *imageView = [[UIImageView alloc]init];
     imageView.isInitFromCircle = YES;
     imageView.isAutoSet = YES;
@@ -99,9 +112,8 @@
 /**
  setting the final Corner Image
  */
-- (void)settingCornerImage {
+- (void)settingCornerImage:(UIImage *)image{
     __block CGSize _size = self.bounds.size;
-    __block UIImage *img = self.image;
     if (self.isInitFromCircle) {
         self.wyh_cornerRadius = self.bounds.size.height/2;
         self.wyh_cornerTypes = UIRectCornerAllCorners;
@@ -109,9 +121,9 @@
         self.wyh_backgroundColor = nil;
     }
     wyh_async_concurrent_dispatch(^{
-        UIImage *finalImage = [UIImage wyh_getCornerImageFromCornerRadius:self.wyh_cornerRadius Image:img Size:_size RectCornerType:self.wyh_cornerTypes BorderColor:self.wyh_borderColor BorderWidth:self.wyh_borderWidth BackgroundColor:self.wyh_backgroundColor];
+        UIImage *finalImage = [UIImage wyh_getCornerImageFromCornerRadius:self.wyh_cornerRadius Image:image Size:_size RectCornerType:self.wyh_cornerTypes BorderColor:self.wyh_borderColor BorderWidth:self.wyh_borderWidth BackgroundColor:self.wyh_backgroundColor];
         wyh_async_safe_dispatch(^{
-            [self setImage:finalImage];
+            [self wyh_setImage:finalImage];
         });
     });
 }

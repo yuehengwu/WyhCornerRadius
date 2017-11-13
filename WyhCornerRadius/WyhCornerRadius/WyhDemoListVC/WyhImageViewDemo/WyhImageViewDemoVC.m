@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"ImageViewDemo";
+    self.title = (self.isNeedRequestServer)?@"set URL image":@"set local image";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

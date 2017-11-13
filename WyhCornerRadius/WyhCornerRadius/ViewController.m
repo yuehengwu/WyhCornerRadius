@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "WyhDemoBaseCell.h"
-#import "WyhImageViewDemoVC.h"
+#import "WyhDemoListVC.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -50,7 +50,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section == 0) {
+        [self pushToListViewcontrollerWithType:WyhImageViewDemoType];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -74,20 +76,22 @@
     switch (index) {
         case 0:
         {
-            WyhImageViewDemoVC *imgVC = [[WyhImageViewDemoVC alloc]init];
-            imgVC.isNeedRequestServer = YES;
-            [self.navigationController pushViewController:imgVC animated:YES];
+            [self pushToListViewcontrollerWithType:WyhImageViewDemoType];
         }
             break;
         case 1:
         {
-            WyhImageViewDemoVC *imgVC = [[WyhImageViewDemoVC alloc]init];
-            imgVC.isNeedRequestServer = NO;
-            [self.navigationController pushViewController:imgVC animated:YES];
+    
         } break;
         default:
             break;
     }
+}
+
+- (void)pushToListViewcontrollerWithType:(DemoListType)type {
+    WyhDemoListVC *listVC = [[WyhDemoListVC alloc]init];
+    listVC.type = type;
+    [self.navigationController pushViewController:listVC animated:YES];
 }
 
 #pragma mark - Lazy

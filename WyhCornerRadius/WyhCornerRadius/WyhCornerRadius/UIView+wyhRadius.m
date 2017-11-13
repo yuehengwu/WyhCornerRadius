@@ -23,11 +23,6 @@
 
 @implementation UIView (wyhRadius)
 
-+ (void)load {
-//    { wyh_swizzleMethod(@selector(layoutSubviews), @selector(wyh_layoutSubviews)); }
-//    wyh_swizzleMethod(NSSelectorFromString(@"dealloc"), @selector(wyh_dealloc));
-}
-
 //- (void)wyh_layoutSubviews {
 //    [self wyh_layoutSubviews];
 //}
@@ -133,7 +128,7 @@
             } else if ([self isKindOfClass:[UIButton class]]) {
                 [((UIButton *)self) setBackgroundImage:currentImage forState:controlState];
             } else if ([self isKindOfClass:[UILabel class]]) {
-                self.layer.backgroundColor = [UIColor colorWithPatternImage:currentImage].CGColor; //太占内存,并且有问题,暂时弃用
+                self.layer.backgroundColor = [UIColor colorWithPatternImage:currentImage].CGColor; //Mark a memory problem
                 
             } else {
                 self.layer.contents = (__bridge id _Nullable)(currentImage.CGImage);

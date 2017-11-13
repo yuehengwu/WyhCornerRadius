@@ -1,2 +1,8 @@
 # WyhCornerRadius
-Quick to solve the UIView's（include UIImageView、UIButton、UILabel..） cornerRadius problem with just 1 line of code !
+Quick and easy to set UIView's corner radius and border（include UIImageView、UIButton、UILabel..）without off-screen Rendering problem in GPU.
+
+快速设置UIView的圆角和边框，并且在GPU方面不触发离屏渲染
+
+# 
+
+
