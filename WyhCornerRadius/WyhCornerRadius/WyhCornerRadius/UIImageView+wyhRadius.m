@@ -35,18 +35,18 @@
 //    dispatch_once(&onceToken, ^{
         wyh_swizzleMethod(@selector(layoutSubviews), @selector(wyh_layoutSubview));
     {
-        wyh_swizzleMethod(@selector(setImage:), @selector(wyh_setImage:));
+//        wyh_swizzleMethod(@selector(setImage:), @selector(wyh_setImage:));
     }
 //    });
 }
 
-- (void)wyh_setImage:(UIImage *)image {
-    if (self.isAutoSet) {
-        [self settingCornerImage:image];
-    }else {
-        [self wyh_setImage:image];
-    }
-}
+//- (void)wyh_setImage:(UIImage *)image {
+//    if (self.isAutoSet) {
+//        [self settingCornerImage:image];
+//    }else {
+//        [self wyh_setImage:image];
+//    }
+//}
 
 - (void)wyh_layoutSubview {
     [self wyh_layoutSubview];
@@ -123,7 +123,7 @@
     wyh_async_concurrent_dispatch(^{
         UIImage *finalImage = [UIImage wyh_getCornerImageFromCornerRadius:self.wyh_cornerRadius Image:image Size:_size RectCornerType:self.wyh_cornerTypes BorderColor:self.wyh_borderColor BorderWidth:self.wyh_borderWidth BackgroundColor:self.wyh_backgroundColor];
         wyh_async_safe_dispatch(^{
-            [self wyh_setImage:finalImage];
+            [self setImage:finalImage];
         });
     });
 }
