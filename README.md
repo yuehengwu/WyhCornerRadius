@@ -6,6 +6,31 @@ Quick and easy to set UIView's corner radius and border（include UIImageView、
 
 快速设置UIView的圆角和边框，并且在GPU方面不触发离屏渲染
 
-# 
+### The rounded corners direction of support :
 
+UIRectCorner  ( UIRectCornerTopLeft、UIRectCornerTopRight、UIRectCornerBottomLeft、UIRectCornerBottomRight、UIRectCornerAllCorners )
 
+### Example code :
+
+UIImageView :
+
+```objc
+//First eg:
+    [img wyh_autoSetImageCornerRedius:viewWidth/2 ConrnerType:rectCorner Image:[UIImage imageNamed:@"test.jpg"]];
+    
+//Second eg:
+    UIImageView *imageView = [UIImageView wyh_circleImageView];
+    
+```
+UIButton :
+
+```objc
+//eg:
+    [btn wyh_CornerRadius:viewWidth/2 Image:imageNormal  RectCornerType:UIRectCornerAllCorners BorderColor:[UIColor blueColor] BorderWidth:3 BackgroundColor:nil UIControlState:(UIControlStateNormal)];
+```
+UILabel :
+
+```objc
+//eg:
+    [label wyh_CornerRadius:viewWidth/2 Image:nil RectCornerType:rectCorner BorderColor:[UIColor magentaColor] BorderWidth:2 BackgroundColor:nil];
+```
