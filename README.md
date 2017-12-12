@@ -6,11 +6,11 @@ Quick and easy to set UIView's corner radius and border（include UIImageView、
 
 快速设置UIView的圆角和边框，并且在GPU方面不触发离屏渲染
 
-### The rounded corners direction of support :
+## The rounded corners direction of support :
 
 UIRectCorner  ( UIRectCornerTopLeft、UIRectCornerTopRight、UIRectCornerBottomLeft、UIRectCornerBottomRight、UIRectCornerAllCorners )
 
-### Example code :
+## Example code :
 
 UIImageView :
 
