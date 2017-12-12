@@ -92,8 +92,9 @@
     if (!_serverImageUrls) {
         _serverImageUrls = [NSMutableArray new];
         for (int i = 0; i < 25; i++) {
-            NSString *str = [NSString stringWithFormat:@"http://t1.mmonly.cc/uploads/tu/bj/tp/032/%d.jpg",i+1];
-            NSLog(@"%@",str);
+//            NSString *str = [NSString stringWithFormat:@"http://t1.mmonly.cc/uploads/tu/bj/tp/032/%d.jpg",i+1]; //Invalid url.
+            NSString *str = [NSString stringWithFormat:@"http://upload-images.jianshu.io/upload_images/4097230-586b3d9f46dc5a18.jpg?imageMogr2/auto-orient/strip%@7CimageView2/2/w/1240",@"%"];
+//            NSLog(@"%@",str);
             NSURL *url = [NSURL URLWithString:str];
             [_serverImageUrls addObject:url];
         }
