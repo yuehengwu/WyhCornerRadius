@@ -34,3 +34,8 @@ UILabel :
 //eg:
     [label wyh_CornerRadius:viewWidth/2 Image:nil RectCornerType:rectCorner BorderColor:[UIColor magentaColor] BorderWidth:2 BackgroundColor:nil];
 ```
+## Contact me
+
+- JianShu: [被帅醒的小吴同志](http://www.jianshu.com/u/b76e3853ae0b)
+- Email:  609223770@qq.com
+- QQ：609223770
