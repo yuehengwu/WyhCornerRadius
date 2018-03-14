@@ -10,6 +10,10 @@ Quick and easy to set UIView's corner radius and border（include UIImageView、
 
 UIRectCorner  ( UIRectCornerTopLeft、UIRectCornerTopRight、UIRectCornerBottomLeft、UIRectCornerBottomRight、UIRectCornerAllCorners )
 
+## CocoaPods Support
+
+ `pod search WyhCornerRadius`
+
 ## Example code :
 
 UIImageView :
