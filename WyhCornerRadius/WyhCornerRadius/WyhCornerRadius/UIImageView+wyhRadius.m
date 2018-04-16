@@ -31,22 +31,12 @@
 }
 
 + (void)swizzleMethod {
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         wyh_swizzleMethod(@selector(layoutSubviews), @selector(wyh_layoutSubview));
-    {
-//        wyh_swizzleMethod(@selector(setImage:), @selector(wyh_setImage:));
-    }
-//    });
+    });
 }
 
-//- (void)wyh_setImage:(UIImage *)image {
-//    if (self.isAutoSet) {
-//        [self settingCornerImage:image];
-//    }else {
-//        [self wyh_setImage:image];
-//    }
-//}
 
 - (void)wyh_layoutSubview {
     [self wyh_layoutSubview];
